@@ -676,6 +676,11 @@
     cssnano-preset-default "^4.0.0"
     postcss "^7.0.0"
 
+"@masala/parser@^0.8.0":
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/@masala/parser/-/parser-0.8.0.tgz#66d5b528f6acf930875805933f974313c8b703b6"
+  integrity sha512-POoNOc9laUv29NCnvLQJQxvaNl8I1rfyigEIzbkZz/fQLUsfy32/OqFksCo4DZBthCba52ah0vCVcBhj7YQ6xg==
+
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/@mrmlnc/readdir-enhanced/-/readdir-enhanced-2.2.1.tgz#524af240d1a360527b730475ecfa1344aa540dde"
