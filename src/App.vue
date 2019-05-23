@@ -1,7 +1,22 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <header>
+      <div class="navbar navbar-dark bg-dark shadow-sm">
+        <div class="container d-flex justify-content-between">
+          <a href="#" class="navbar-brand d-flex align-items-center">
+            <strong>Vue Editor</strong>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <main role="main">
+      <div class="container">
+        <div class="content">
+          <HelloWorld msg="Welcome to Your Vue.js App"/>
+        </div>
+      </div>
+    </main>
   </div>
 </template>
 
@@ -16,13 +31,8 @@ export default {
 }
 </script>
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style scoped>
+  .content {
+    margin-top: 40px;
+  }
 </style>
