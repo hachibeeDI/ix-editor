@@ -2,35 +2,93 @@ import { Streams, N, C, F } from '@masala/parser';
 
 const blanks = () => C.char(' ').optrep();
 
-function operator(symbol) {
-  return blanks().drop()
-    .then(C.char(symbol))
-    .then(blanks().drop())
-    .single()
-    .map(x => `operator:${x}`);
+class OperatorParser {
+
+  constructor(element) {
+    this.element = element
+  }
+
+  decorate() {
+    return `<b style="color:gray">${this.element}</b>`;
+  }
+
+  static expression(symbol) {
+    return blanks().drop()
+        .then(C.char(symbol))
+        .then(blanks().drop())
+        .single()
+        .map(x => new OperatorParser(x));
+  }
 }
 
-function int() {
-  return N.integer().map(x => `int:${x}`);
+class IntParser {
+
+  constructor(element) {
+    this.element = element;
+  }
+
+  decorate() {
+    return `<span style="color:blue">${this.element}</span>`;
+  }
+
+  static expression() {
+    return N.integer().map(x => new IntParser(x));
+  }
 }
 
-function sum() {
-  return int()
-    .then(operator('+'))
-    .then(int());
+class SumParser {
+
+  constructor(element) {
+    this.element = element;
+  }
+
+  decorate() {
+    return `<div style="background-color:#ccf">${this.element.value.map(x => x.decorate()).join('')}</div>`;
+  }
+
+  static expression() {
+    return IntParser.expression()
+        .then(OperatorParser.expression('+'))
+        .then(IntParser.expression())
+        .map(x => new SumParser(x));
+  }
 }
 
-function multiplication() {
-  return int()
-    .then(operator('*'))
-    .then(int());
+class MultiParser {
+
+  constructor(element) {
+    this.element = element;
+  }
+
+  decorate() {
+    return `<div style="background-color:#cfc">${this.element.value.map(x => x.decorate()).join('')}</div>`;
+  }
+
+  static expression() {
+    return IntParser.expression()
+        .then(OperatorParser.expression('*'))
+        .then(IntParser.expression())
+        .map(x => new MultiParser(x));
+  }
 }
 
-function combinator() {
-  return F.try(sum())
-    .or(multiplication());
-}
+export class Parser {
 
-export function parseOperation(line) {
-  return combinator().parse(Streams.ofString(line));
+  constructor(element) {
+    this.element = element;
+  }
+
+  static parse(s) {
+    return Parser.expression().parse(Streams.ofString(s));
+  }
+
+  decorate() {
+    return `<div>${this.element.decorate()}</div>`;
+  }
+
+  static expression() {
+    return F.try(SumParser.expression())
+        .or(MultiParser.expression())
+        .map(x => new Parser(x));
+  }
 }

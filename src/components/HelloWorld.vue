@@ -3,14 +3,14 @@
     <h3 class="text-success">{{ msg }}</h3>
     <textarea class="form-control" rows="10" @keyup="onInput"></textarea>
     <hr>
-    <p>{{ output }}</p>
+    <div v-html="output"></div>
     <hr>
-    <p>{{ inner_state }}</p>
+    <div>{{ inner_state }}</div>
   </div>
 </template>
 
 <script>
-import { parseOperation } from '../lib/parser';
+import { Parser } from '../lib/parser';
 
 export default {
   name: 'HelloWorld',
@@ -25,8 +25,11 @@ export default {
   },
   methods: {
     onInput(e) {
-      const result = parseOperation(e.target.value);
-      this.$set(this, 'output', result.value);
+      const result = Parser.parse(e.target.value);
+      if (result.value) {
+        console.log(result.value.decorate());
+        this.$set(this, 'output', result.value.decorate());
+      }
       this.$set(this, 'inner_state', result);
     }
   }
