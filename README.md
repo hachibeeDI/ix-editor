@@ -1,4 +1,4 @@
-# vue-editor
+# ix-editor
 
 ## Project setup
 ```
