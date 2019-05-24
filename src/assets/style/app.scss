@@ -1,3 +1,21 @@
-@import "~bootswatch/dist/flatly/variables";
-@import "~bootstrap/scss/bootstrap";
-@import "~bootswatch/dist/flatly/bootswatch";
+@import '~bootswatch/dist/flatly/variables';
+@import '~bootstrap/scss/bootstrap';
+@import '~bootswatch/dist/flatly/bootswatch';
+
+.ix-textarea {
+  height: 400px !important;
+}
+
+.ix-preview {
+  height: 400px;
+
+  p {
+    margin-bottom: 0;
+  }
+}
+
+.ix-reference {
+  margin: auto 0.1rem;
+  font-weight: bold;
+  cursor: pointer;
+}
