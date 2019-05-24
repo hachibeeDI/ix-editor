@@ -11,7 +11,7 @@ export function parse(s) {
     .then(Parjs.hex.exactly(4)).then(Parjs.string('-'))
     .then(Parjs.hex.exactly(12)).str;
 
-  const reference = Parjs.string("!").q
+  const reference = Parjs.string('!').q
     .then(uuid)
     .between(Parjs.string('['), Parjs.string(']'))
     .map(x => new ReferenceElement(x, ++referenceCounter));

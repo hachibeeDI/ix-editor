@@ -22,7 +22,7 @@ import {parse} from '../lib/ix-parser/parser'
 import {decorate} from '../lib/ix-parser/decorator'
 
 export default {
-  name: 'HelloWorld',
+  name: 'IxEditor',
   props: {
     msg: String
   },
