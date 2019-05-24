@@ -1,94 +1,23 @@
-import { Streams, N, C, F } from '@masala/parser';
+import { Parjs } from 'parjs';
 
-const blanks = () => C.char(' ').optrep();
+class NumericLiteral {
 
-class OperatorParser {
-
-  constructor(element) {
-    this.element = element
-  }
-
-  decorate() {
-    return `<b style="color:gray">${this.element}</b>`;
-  }
-
-  static expression(symbol) {
-    return blanks().drop()
-        .then(C.char(symbol))
-        .then(blanks().drop())
-        .single()
-        .map(x => new OperatorParser(x));
+  constructor(value) {
+    this.value = value;
   }
 }
 
-class IntParser {
+export function parse(s) {
+  const tupleElement = Parjs.float();
 
-  constructor(element) {
-    this.element = element;
-  }
+  // Allow whitespace around elements:
+  const paddedElement = tupleElement.between(Parjs.whitespaces).map(x => new NumericLiteral(x));
 
-  decorate() {
-    return `<span style="color:blue">${this.element}</span>`;
-  }
+  // Multiple instances of {paddedElement}, separated by a comma:
+  const separated = paddedElement.manySepBy(Parjs.string(','));
 
-  static expression() {
-    return N.integer().map(x => new IntParser(x));
-  }
-}
+  // Surround everything with parentheses:
+  const surrounded = separated.between(Parjs.string('('), Parjs.string(')'));
 
-class SumParser {
-
-  constructor(element) {
-    this.element = element;
-  }
-
-  decorate() {
-    return `<div style="background-color:#ccf">${this.element.value.map(x => x.decorate()).join('')}</div>`;
-  }
-
-  static expression() {
-    return IntParser.expression()
-        .then(OperatorParser.expression('+'))
-        .then(IntParser.expression())
-        .map(x => new SumParser(x));
-  }
-}
-
-class MultiParser {
-
-  constructor(element) {
-    this.element = element;
-  }
-
-  decorate() {
-    return `<div style="background-color:#cfc">${this.element.value.map(x => x.decorate()).join('')}</div>`;
-  }
-
-  static expression() {
-    return IntParser.expression()
-        .then(OperatorParser.expression('*'))
-        .then(IntParser.expression())
-        .map(x => new MultiParser(x));
-  }
-}
-
-export class Parser {
-
-  constructor(element) {
-    this.element = element;
-  }
-
-  static parse(s) {
-    return Parser.expression().parse(Streams.ofString(s));
-  }
-
-  decorate() {
-    return `<div>${this.element.decorate()}</div>`;
-  }
-
-  static expression() {
-    return F.try(SumParser.expression())
-        .or(MultiParser.expression())
-        .map(x => new Parser(x));
-  }
+  return surrounded.parse(s);
 }

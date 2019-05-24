@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import { Parser } from '../lib/parser';
+import { parse } from '../lib/parser';
 
 export default {
   name: 'HelloWorld',
@@ -25,12 +25,12 @@ export default {
   },
   methods: {
     onInput(e) {
-      const result = Parser.parse(e.target.value);
-      if (result.value) {
-        console.log(result.value.decorate());
-        this.$set(this, 'output', result.value.decorate());
+      const reply = parse(e.target.value);
+      console.log(reply);
+      if (reply.kind === 'OK') {
+        this.$set(this, 'output', reply.value);
       }
-      this.$set(this, 'inner_state', result);
+      this.$set(this, 'inner_state', reply);
     }
   }
 }

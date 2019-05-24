@@ -676,11 +676,6 @@
     cssnano-preset-default "^4.0.0"
     postcss "^7.0.0"
 
-"@masala/parser@^0.8.0":
-  version "0.8.0"
-  resolved "https://registry.yarnpkg.com/@masala/parser/-/parser-0.8.0.tgz#66d5b528f6acf930875805933f974313c8b703b6"
-  integrity sha512-POoNOc9laUv29NCnvLQJQxvaNl8I1rfyigEIzbkZz/fQLUsfy32/OqFksCo4DZBthCba52ah0vCVcBhj7YQ6xg==
-
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/@mrmlnc/readdir-enhanced/-/readdir-enhanced-2.2.1.tgz#524af240d1a360527b730475ecfa1344aa540dde"
@@ -1936,6 +1931,13 @@ chalk@^2.0.0, chalk@^2.0.1, chalk@^2.1.0, chalk@^2.3.0, chalk@^2.4.1, chalk@^2.4
     ansi-styles "^3.2.1"
     escape-string-regexp "^1.0.5"
     supports-color "^5.3.0"
+
+char-info@^0.2.0:
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/char-info/-/char-info-0.2.2.tgz#8b45d6664b9eb33c0437492ded0223e782c42eda"
+  integrity sha512-n1Kwj0lfPH7JsZ/F+QjqXIFNX3zeR4Dtsu9ve+AbluGgyiWmlanpdqp0Q+FLhpD/YQ83bZjFyWL1cglnHE3PGw==
+  dependencies:
+    node-interval-tree "^1.0.0"
 
 chardet@^0.4.0:
   version "0.4.2"
@@ -5477,6 +5479,13 @@ node-gyp@^3.8.0:
     tar "^2.0.0"
     which "1"
 
+node-interval-tree@^1.0.0:
+  version "1.3.3"
+  resolved "https://registry.yarnpkg.com/node-interval-tree/-/node-interval-tree-1.3.3.tgz#15ffb904cde08270214acace8dc7653e89ae32b7"
+  integrity sha512-K9vk96HdTK5fEipJwxSvIIqwTqr4e3HRJeJrNxBSeVMNSC/JWARRaX7etOLOuTmrRMeOI/K5TCJu3aWIwZiNTw==
+  dependencies:
+    shallowequal "^1.0.2"
+
 node-ipc@^9.1.1:
   version "9.1.1"
   resolved "https://registry.yarnpkg.com/node-ipc/-/node-ipc-9.1.1.tgz#4e245ed6938e65100e595ebc5dc34b16e8dd5d69"
@@ -5948,6 +5957,14 @@ parent-module@^1.0.0:
   integrity sha512-GQ2EWRpQV8/o+Aw8YqtfZZPfNRWZYkbidE9k5rpl/hC3vtHHBfGm2Ifi6qWV+coDGkrUKZAxE3Lot5kcsRlh+g==
   dependencies:
     callsites "^3.0.0"
+
+parjs@^0.10.6:
+  version "0.10.6"
+  resolved "https://registry.yarnpkg.com/parjs/-/parjs-0.10.6.tgz#e690be17bf50529191cf31444afab211b998042e"
+  integrity sha512-gRektbWqOaglgwXE2oA3bjY260z9C/yEox0em85IzoFmPh/4UolN4TIERCOjwMqNwXI0CfgFCe9nnKF1FmLsKw==
+  dependencies:
+    char-info "^0.2.0"
+    lodash "^4.17.5"
 
 parse-asn1@^5.0.0:
   version "5.1.4"
@@ -7277,6 +7294,11 @@ shallow-clone@^1.0.0:
     is-extendable "^0.1.1"
     kind-of "^5.0.0"
     mixin-object "^2.0.1"
+
+shallowequal@^1.0.2:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/shallowequal/-/shallowequal-1.1.0.tgz#188d521de95b9087404fd4dcb68b13df0ae4e7f8"
+  integrity sha512-y0m1JoUZSlPAjXVtPPW70aZWfIL/dSP7AFkRnniLCrK/8MDKog3TySTBmckD+RObVxH0v4Tox67+F14PdED2oQ==
 
 shebang-command@^1.2.0:
   version "1.2.0"
