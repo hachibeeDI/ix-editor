@@ -34,7 +34,7 @@ export default {
     }
   },
   mounted() {
-    const input = 'hoge[!bf4b3a85-1a88-4c81-b7bb-c7f0da492f61]\nmoge\nfuga[!aefe9026-bb92-4e87-985b-3138f81f1d07]';
+    const input = 'hoge[100]\nmoge mo\nfuga[200]';
     this.$set(this, 'input', input);
     this.convert(input);
   },
@@ -43,13 +43,14 @@ export default {
       this.convert(e.target.value);
     },
     convert(input) {
-      const reply = parse(input);
-      if (reply.kind === 'OK') {
-        this.$set(this, 'output', decorate(reply.value));
+      const ast = parse(input);
+      if (ast.status) {
+        this.$set(this, 'output', decorate(ast.value));
         this.$set(this, 'error', null);
       } else {
+        console.log(ast);
         this.$set(this, 'output', input);
-        this.$set(this, 'error', reply.reason);
+        this.$set(this, 'error', ast.index + ast.expected);
       }
     }
   }

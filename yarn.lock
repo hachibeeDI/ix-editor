@@ -1932,13 +1932,6 @@ chalk@^2.0.0, chalk@^2.0.1, chalk@^2.1.0, chalk@^2.3.0, chalk@^2.4.1, chalk@^2.4
     escape-string-regexp "^1.0.5"
     supports-color "^5.3.0"
 
-char-info@^0.2.0:
-  version "0.2.2"
-  resolved "https://registry.yarnpkg.com/char-info/-/char-info-0.2.2.tgz#8b45d6664b9eb33c0437492ded0223e782c42eda"
-  integrity sha512-n1Kwj0lfPH7JsZ/F+QjqXIFNX3zeR4Dtsu9ve+AbluGgyiWmlanpdqp0Q+FLhpD/YQ83bZjFyWL1cglnHE3PGw==
-  dependencies:
-    node-interval-tree "^1.0.0"
-
 chardet@^0.4.0:
   version "0.4.2"
   resolved "https://registry.yarnpkg.com/chardet/-/chardet-0.4.2.tgz#b5473b33dc97c424e5d98dc87d55d4d8a29c8bf2"
@@ -5479,13 +5472,6 @@ node-gyp@^3.8.0:
     tar "^2.0.0"
     which "1"
 
-node-interval-tree@^1.0.0:
-  version "1.3.3"
-  resolved "https://registry.yarnpkg.com/node-interval-tree/-/node-interval-tree-1.3.3.tgz#15ffb904cde08270214acace8dc7653e89ae32b7"
-  integrity sha512-K9vk96HdTK5fEipJwxSvIIqwTqr4e3HRJeJrNxBSeVMNSC/JWARRaX7etOLOuTmrRMeOI/K5TCJu3aWIwZiNTw==
-  dependencies:
-    shallowequal "^1.0.2"
-
 node-ipc@^9.1.1:
   version "9.1.1"
   resolved "https://registry.yarnpkg.com/node-ipc/-/node-ipc-9.1.1.tgz#4e245ed6938e65100e595ebc5dc34b16e8dd5d69"
@@ -5958,14 +5944,6 @@ parent-module@^1.0.0:
   dependencies:
     callsites "^3.0.0"
 
-parjs@^0.10.6:
-  version "0.10.6"
-  resolved "https://registry.yarnpkg.com/parjs/-/parjs-0.10.6.tgz#e690be17bf50529191cf31444afab211b998042e"
-  integrity sha512-gRektbWqOaglgwXE2oA3bjY260z9C/yEox0em85IzoFmPh/4UolN4TIERCOjwMqNwXI0CfgFCe9nnKF1FmLsKw==
-  dependencies:
-    char-info "^0.2.0"
-    lodash "^4.17.5"
-
 parse-asn1@^5.0.0:
   version "5.1.4"
   resolved "https://registry.yarnpkg.com/parse-asn1/-/parse-asn1-5.1.4.tgz#37f6628f823fbdeb2273b4d540434a22f3ef1fcc"
@@ -6002,6 +5980,11 @@ parseurl@~1.3.2, parseurl@~1.3.3:
   version "1.3.3"
   resolved "https://registry.yarnpkg.com/parseurl/-/parseurl-1.3.3.tgz#9da19e7bee8d12dff0513ed5b76957793bc2e8d4"
   integrity sha512-CiyeOxFT/JZyN5m0z9PfXw4SCBJ6Sygz1Dpl0wqjlhDEGGBP1GnsUVEL0p63hoG1fcj3fHynXi9NYO4nWOL+qQ==
+
+parsimmon@^1.12.0:
+  version "1.12.0"
+  resolved "https://registry.yarnpkg.com/parsimmon/-/parsimmon-1.12.0.tgz#886a442fb30b5fc3c8e7c4994050f5cdcfe0ea90"
+  integrity sha512-uC/BjuSfb4jfaWajKCp1mVncXXq+V1twbcYChbTxN3GM7fn+8XoHwUdvUz+PTaFtDSCRQxU8+Rnh+iMhAkVwdw==
 
 pascalcase@^0.1.1:
   version "0.1.1"
@@ -7294,11 +7277,6 @@ shallow-clone@^1.0.0:
     is-extendable "^0.1.1"
     kind-of "^5.0.0"
     mixin-object "^2.0.1"
-
-shallowequal@^1.0.2:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/shallowequal/-/shallowequal-1.1.0.tgz#188d521de95b9087404fd4dcb68b13df0ae4e7f8"
-  integrity sha512-y0m1JoUZSlPAjXVtPPW70aZWfIL/dSP7AFkRnniLCrK/8MDKog3TySTBmckD+RObVxH0v4Tox67+F14PdED2oQ==
 
 shebang-command@^1.2.0:
   version "1.2.0"

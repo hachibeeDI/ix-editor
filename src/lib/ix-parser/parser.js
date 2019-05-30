@@ -1,31 +1,40 @@
-import {Parjs} from 'parjs/index';
-import 'parjs/unicode';
-import {ParagraphElement, ReferenceElement, RootElement, WordsElement} from './element';
+import P from 'parsimmon'
+import {BrokenReferenceElement, LiElement, ParagraphElement, ReferenceElement, WordElement} from "./element";
 
-export function parse(s) {
-  let referenceCounter = 0;
+let counter = 0;
 
-  const uuid = Parjs.hex.exactly(8).then(Parjs.string('-'))
-    .then(Parjs.hex.exactly(4)).then(Parjs.string('-'))
-    .then(Parjs.hex.exactly(4)).then(Parjs.string('-'))
-    .then(Parjs.hex.exactly(4)).then(Parjs.string('-'))
-    .then(Parjs.hex.exactly(12)).str;
+export const IxParser = P.createLanguage({
+  broken_ref: function(r) {
+    return r.word
+      .wrap(P.string('['), P.string(']'))
+      .map(x => new BrokenReferenceElement(x));
+  },
+  ref: function(r) {
+    return P.digits
+      .wrap(P.string('['), P.string(']'))
+      .map(x => new ReferenceElement(x, ++counter))
+      .or(r.broken_ref);
+  },
+  word: function() {
+    return P.regex(/[^\[\]\n]+/)
+      .map(x => new WordElement(x));
+  },
+  paragraph: function(r) {
+    return r.ref.or(r.word)
+      .many().skip(P.newline)
+      .map(x => new ParagraphElement(x));
+  },
+  li: function(r) {
+    return r.word
+      .wrap(P.string('- '), P.end)
+      .map(x => new LiElement(x));
+  },
+  expression: function(r) {
+    return P.alt(r.li, r.paragraph, P.newline).many()
+  }
+});
 
-  const reference = Parjs.string('!').q
-    .then(uuid)
-    .between(Parjs.string('['), Parjs.string(']'))
-    .map(x => new ReferenceElement(x, ++referenceCounter));
-
-  const char = Parjs.any(Parjs.uniLetter, Parjs.uniDigit, Parjs.uniSpace);
-
-  const words = char.then(char.many()).str
-    .map(x => new WordsElement(x));
-
-  const paragraph = Parjs.any(reference, words).many()
-    .map(x => new ParagraphElement(x));
-
-  const root = paragraph.manySepBy(Parjs.newline)
-    .map(x => new RootElement(x));
-
-  return root.parse(s);
+export function parse(input) {
+  counter = 0;
+  return IxParser.expression.parse(input + '\n');
 }

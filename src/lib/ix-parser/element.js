@@ -1,28 +1,20 @@
-export class Element {}
-
-export class LeafElement extends Element {
+export class Element {
   constructor(value) {
-    super();
     this.value = value;
   }
 }
 
-export class NodeElement extends Element {
-  constructor(children) {
-    super();
-    this.children = children;
-  }
-}
-
-export class ReferenceElement extends LeafElement {
+export class ReferenceElement extends Element {
   constructor(value, index) {
     super(value);
     this.index = index;
   }
 }
 
-export class WordsElement extends LeafElement {}
+export class BrokenReferenceElement extends Element {}
 
-export class ParagraphElement extends NodeElement {}
+export class WordElement extends Element {}
 
-export class RootElement extends NodeElement {}
+export class ParagraphElement extends Element {}
+
+export class LiElement extends Element {}
