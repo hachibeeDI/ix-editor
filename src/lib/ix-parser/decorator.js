@@ -1,4 +1,4 @@
-import {BrokenReferenceElement, LiElement, ParagraphElement, ReferenceElement, WordElement} from './element';
+import {BrokenReferenceElement, ParagraphElement, ReferenceElement, WordElement} from './element';
 
 export function decorate(element) {
   if (element instanceof BrokenReferenceElement) {
@@ -10,8 +10,6 @@ export function decorate(element) {
   } else if (element instanceof ParagraphElement) {
     const content = element.value.map(x => decorate(x)).join('');
     return `<p>${content}</p>`;
-  } else if (element instanceof LiElement) {
-    return `<li>${decorate(element.value)}</li>`;
   } else if (element instanceof Array) {
     return element.map(x => decorate(x)).join('')
   } else {

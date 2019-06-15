@@ -48,7 +48,6 @@ export default {
         this.$set(this, 'output', decorate(ast.value));
         this.$set(this, 'error', null);
       } else {
-        console.log(ast);
         this.$set(this, 'output', input);
         this.$set(this, 'error', ast.index + ast.expected);
       }

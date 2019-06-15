@@ -16,5 +16,3 @@ export class BrokenReferenceElement extends Element {}
 export class WordElement extends Element {}
 
 export class ParagraphElement extends Element {}
-
-export class LiElement extends Element {}
