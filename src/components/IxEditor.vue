@@ -11,7 +11,7 @@
       </div>
       <div class="col-6">
         <p class="text-success">Preview</p>
-        <div class="ix-preview form-control" v-html="output"></div>
+        <ix-viewer :elements="elements" />
       </div>
     </div>
   </div>
@@ -19,17 +19,20 @@
 
 <script>
 import {parse} from '../lib/ix-parser/parser'
-import {decorate} from '../lib/ix-parser/decorator'
+import IxViewer from './viewer/IxViewer'
 
 export default {
   name: 'IxEditor',
   props: {
     msg: String
   },
+  components: {
+    IxViewer
+  },
   data() {
     return {
+      elements: [],
       input: '',
-      output: '',
       error: null
     }
   },
@@ -45,10 +48,9 @@ export default {
     convert(input) {
       const ast = parse(input);
       if (ast.status) {
-        this.$set(this, 'output', decorate(ast.value));
+        this.$set(this, 'elements', ast.value);
         this.$set(this, 'error', null);
       } else {
-        this.$set(this, 'output', input);
         this.$set(this, 'error', ast.index + ast.expected);
       }
     }
