@@ -13,7 +13,7 @@
     <main role="main">
       <div class="container">
         <div class="content">
-          <IxEditor />
+          <IxEditor :text="'hoge[100]\nmoge mo\nfuga[200]'" />
         </div>
       </div>
     </main>

@@ -19,3 +19,16 @@
   font-weight: bold;
   cursor: pointer;
 }
+
+.ix-reference-list {
+  padding: 1rem;
+  list-style-type: none;
+
+  &-index {
+    margin-right: 0.2rem;
+  }
+
+  li:not(:first-child) {
+    margin-top: 0.5rem;
+  }
+}

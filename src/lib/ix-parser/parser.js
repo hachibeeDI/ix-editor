@@ -4,6 +4,7 @@ import {BrokenReferenceElement, ParagraphElement, ReferenceElement, WordElement}
 export function parse(input) {
   let id = 0;
   let counter = 0;
+  let referenceIds = [];
 
   const ixParser = P.createLanguage({
     broken_ref: function(r) {
@@ -14,7 +15,10 @@ export function parse(input) {
     ref: function(r) {
       return P.digits
         .wrap(P.string('['), P.string(']'))
-        .map(x => new ReferenceElement(++id, x, ++counter))
+        .map(x => {
+          referenceIds.push(x);
+          return new ReferenceElement(++id, x, ++counter);
+        })
         .or(r.broken_ref);
     },
     word: function() {
@@ -35,5 +39,6 @@ export function parse(input) {
     input += '\n';
   }
 
-  return ixParser.expression.parse(input);
+  const ast = ixParser.expression.parse(input);
+  return {ast, referenceIds};
 }

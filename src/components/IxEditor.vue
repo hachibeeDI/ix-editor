@@ -1,9 +1,5 @@
 <template>
   <div>
-    <div v-if="error">
-      <p class="text-danger">{{ error }}</p>
-    </div>
-
     <div class="row">
       <div class="col-6">
         <p class="text-success">Write</p>
@@ -11,33 +7,42 @@
       </div>
       <div class="col-6">
         <p class="text-success">Preview</p>
-        <ix-viewer :elements="elements" />
+        <IxViewer :elements="elements" />
       </div>
     </div>
+
+    <IxReferenceList :references="references" />
   </div>
 </template>
 
 <script>
 import {parse} from '../lib/ix-parser/parser'
 import IxViewer from './viewer/IxViewer'
+import IxReferenceList from './IxReferenceList'
 
 export default {
   name: 'IxEditor',
   props: {
-    msg: String
+    text: String
   },
   components: {
-    IxViewer
+    IxViewer,
+    IxReferenceList
   },
   data() {
     return {
       elements: [],
       input: '',
-      error: null
+      referenceMap: {
+        100: { id: 100, title: 'hoge' },
+        200: { id: 200, title: 'moge' },
+        300: { id: 300, title: 'fuga' },
+      },
+      references: []
     }
   },
   mounted() {
-    const input = 'hoge[100]\nmoge mo\nfuga[200]';
+    const input = this.text;
     this.$set(this, 'input', input);
     this.convert(input);
   },
@@ -46,12 +51,14 @@ export default {
       this.convert(e.target.value);
     },
     convert(input) {
-      const ast = parse(input);
+      const {ast, referenceIds} = parse(input);
+
       if (ast.status) {
         this.$set(this, 'elements', ast.value);
-        this.$set(this, 'error', null);
+        const references = referenceIds.map(id => this.referenceMap[id] || { id: null });
+        this.$set(this, 'references', references);
       } else {
-        this.$set(this, 'error', ast.index + ast.expected);
+        alert(ast.index + ast.expected);
       }
     }
   }
